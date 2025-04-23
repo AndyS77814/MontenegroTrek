@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Сюда вставь свой токен и чат
-const TELEGRAM_TOKEN = '***REMOVED***';
+const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const CHAT_ID = '-1002296233031';
 app.use(cors());
 app.use(bodyParser.json());
