@@ -5,7 +5,7 @@
 "type": "module",
 "scripts": {
   "start": "node telegram-server.js"
-}
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
