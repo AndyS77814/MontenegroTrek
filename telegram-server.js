@@ -42,7 +42,31 @@ app.post('/send-telegram', async (req, res) => {
     res.status(500).json({ error: 'Failed to send message' });
   }
 });
+app.post(`/webhook/${TELEGRAM_TOKEN}`, async (req, res) => {
+  const body = req.body;
 
+  // Проверка, что пришло текстовое сообщение
+  if (body.message && body.message.text) {
+    const chatId = body.message.chat.id;
+    const text = body.message.text;
+
+    console.log('📩 Получено сообщение от пользователя:', text);
+
+    // Ответ пользователю
+    const reply = `Вы написали: ${text}`;
+
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: reply
+      })
+    });
+  }
+
+  res.sendStatus(200);
+});
 app.get('/', (req, res) => {
   res.send('🟢 Telegram server is running');
 });
