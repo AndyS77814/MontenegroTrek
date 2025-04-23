@@ -46,7 +46,9 @@ app.post('/send-telegram', async (req, res) => {
 app.get('/', (req, res) => {
   res.send('🟢 Telegram server is running');
 });
-
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
 app.listen(PORT, () => {
   console.log(`✅ Server is running on http://localhost:${PORT}`);
 });
